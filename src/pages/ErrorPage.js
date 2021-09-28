@@ -1,8 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import Error404 from '../components/Error404'
 const ErrorPage = () => {
-  return <h4>error page</h4>
+  return (
+    <Wrapper className="page-100">
+    <section>
+      <Error404/>
+      <Link to="/" className="btn">Back Home </Link>
+    </section>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.main`
@@ -17,6 +25,10 @@ const Wrapper = styled.main`
   h3 {
     text-transform: none;
     margin-bottom: 2rem;
+  }
+
+  .btn{
+    margin-top: 1.2rem;
   }
 `
 

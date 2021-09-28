@@ -7,9 +7,36 @@ import {
   GET_SINGLE_PRODUCT_BEGIN,
   GET_SINGLE_PRODUCT_SUCCESS,
   GET_SINGLE_PRODUCT_ERROR,
+  TOGGLE_SIDEBAR,
 } from '../actions'
 
 const products_reducer = (state, action) => {
+  switch (action.type) {
+		// case SIDEBAR_OPEN:
+		//   return {...state, isSidebarOpen: true }
+		// case SIDEBAR_CLOSE:
+		//   return {...state, isSidebarOpen: false }
+		case TOGGLE_SIDEBAR:
+			return { ...state, isSidebarOpen: !state.isSidebarOpen };
+		case GET_PRODUCTS_BEGIN:
+			return { ...state, products_loading: true };
+		case GET_PRODUCTS_SUCCESS:
+			const featured_products = action.payload.filter(
+				(product) => product.featured
+			);
+			return {
+				...state,
+				products: action.payload,
+				featured_products,
+				products_loading: false,
+
+			};
+		case GET_PRODUCTS_ERROR:
+			return { ...state, products_loading: false, products_error: true};
+
+		default:
+			break;
+	}
   return state
   throw new Error(`No Matching "${action.type}" - action type`)
 }

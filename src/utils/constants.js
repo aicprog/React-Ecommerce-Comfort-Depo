@@ -19,28 +19,25 @@ export const links = [
 ]
 
 export const services = [
-  {
-    id: 1,
-    icon: <GiCompass />,
-    title: 'mission',
-    text:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, ea. Perferendis corrupti reiciendis nesciunt rerum velit autem unde numquam nisi',
-  },
-  {
-    id: 2,
-    icon: <GiDiamondHard />,
-    title: 'vision',
-    text:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, ea. Perferendis corrupti reiciendis nesciunt rerum velit autem unde numquam nisi',
-  },
-  {
-    id: 3,
-    icon: <GiStabbedNote />,
-    title: 'history',
-    text:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, ea. Perferendis corrupti reiciendis nesciunt rerum velit autem unde numquam nisi',
-  },
-]
+	{
+		id: 1,
+		icon: <GiCompass />,
+		title: "mission",
+		text: "We do not stop improving. Our goal is to make your house a home, one where you design and can feel at ease and comfortable",
+	},
+	{
+		id: 2,
+		icon: <GiDiamondHard />,
+		title: "vision",
+		text: "The furniture market is crowded with designs. We make it a priority to stand out from that crowd and deliver pieces that inspire you.",
+	},
+	{
+		id: 3,
+		icon: <GiStabbedNote />,
+		title: "utility",
+		text: "Whether it’s reinforced support structures or hidden support legs for futons, our designers try to push the functionality of our products.",
+	},
+];
 
 export const products_url = 'https://course-api.com/react-store-products'
 

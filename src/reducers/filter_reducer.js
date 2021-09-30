@@ -89,6 +89,7 @@ const filter_reducer = (state, action) => {
       let temporaryProducts = [...all_products]
       const {text, category, company, color, price, shipping} = state.filters
 
+      //text
       if(text){
         console.log("text")
         temporaryProducts = temporaryProducts.filter((product) => {
@@ -96,9 +97,28 @@ const filter_reducer = (state, action) => {
           return product.name.toLowerCase().includes(text)
 				});
       }
-
+      //category
       if(category !== 'all'){
-        
+  
+        temporaryProducts = temporaryProducts.filter(product => product.category === category)
+      }
+      //company
+      if(company !== 'all'){
+        temporaryProducts = temporaryProducts.filter(product => product.company === company)
+      }
+      //price 
+      temporaryProducts = temporaryProducts.filter((product) => product.price <= price);
+
+      //color
+      if(color !== 'all'){
+        temporaryProducts = temporaryProducts.filter(product => {
+          return product.colors.find((c) => c===color)
+        })
+      }
+
+      //shipping
+      if(shipping){
+        temporaryProducts = temporaryProducts.filter(product => product.shipping)
       }
 
 			return {

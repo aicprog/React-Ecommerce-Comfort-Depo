@@ -5,6 +5,8 @@ import { Navbar, Sidebar, Footer } from './components'
 import {About, Auth, Cart, Checkout, Home, Error, Private, Products,
 	SingleProduct,
 } from "./pages";
+import LoginSignUp from './pages/LoginSignup';
+
 
 function App() {
   return (
@@ -12,6 +14,9 @@ function App() {
 			<Navbar />
 			<Sidebar />
 			<Switch>
+				<Route exact path="/login">
+					<LoginSignUp/>
+				</Route>
 				<Route exact path="/">
 					<Home />
 				</Route>

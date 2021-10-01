@@ -4,24 +4,25 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useProductsContext } from '../context/products_context'
 import { useCartContext } from '../context/cart_context'
-import { useUserContext } from '../context/user_context'
+
 
 const CartButtons = () => {
 const { toggleSidebar } = useProductsContext();
+const {total_items} = useCartContext()
   return (
 		<Wrapper className="cart-btn-wrapper">
 			<Link to="/cart" className="cart-btn" onClick={toggleSidebar}>
 				<span className="cart-container">
 					<FaShoppingCart />
-					<span className="cart-value">12</span>
+					<span className="cart-value">{total_items}</span>
 				</span>
 				<span className="cart-name">Cart</span>
 			</Link>
 
-			<button type="button" className="auth-btn">
+			<Link to="/login" className="auth-btn">
 				<FaUserPlus />
 				<span className="cart-name">Login</span>
-			</button>
+			</Link>
 		</Wrapper>
 	);}
 

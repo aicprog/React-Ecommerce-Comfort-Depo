@@ -31,7 +31,6 @@ export const ProductsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    console.log(initialState.products_loading)
     fetchProducts(url)
   }, [])
 

@@ -1,37 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { useUserContext } from "../context/user_context";
 
 import { auth, signInWithgoogle } from "../firebase/firebase.utils";
-
-
 
 const SignIn = () => {
 
     const [email, setEmail] = React.useState("")
 	const [password, setPassword] = React.useState("")
+	const {signInUser} = useUserContext()
 	//clears out
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-
-
-
-		try {
-			await auth.signInWithEmailAndPassword(email, password);
-            setEmail("")
-            setPassword("")
-		} catch (error) {
-			console.log(error);
-		}
-
-		    setEmail("")
-            setPassword("")
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		signInUser(email, password);
+		setEmail("");
+		setPassword("");
 	};
 
 	const handleChange = (event) => {
 		const { value, name } = event.target;
-        console.log(value, name)
-		//this.setState({ [name]: value });
+
+		if(name === "email"){
+			setEmail(value)
+		}else if(name ==="password"){
+			setPassword(value)
+		}
+		
 	};
+
 
     return (
 			<Wrapper>
@@ -43,7 +39,7 @@ const SignIn = () => {
 						<input
 							name="email"
 							value={email}
-							handleChange={handleChange}
+							onChange={handleChange}
 							label="email"
 							required
 							className="form-input"
@@ -54,7 +50,7 @@ const SignIn = () => {
 							name="password"
 							type="password"
 							value={password}
-							handleChange={handleChange}
+							onChange={handleChange}
 							label="password"
 							required
 							className="form-input"
@@ -88,6 +84,7 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 
+
 	.title {
 		margin: 10px 0;
 		padding-bottom:  1rem;
@@ -120,7 +117,9 @@ const Wrapper = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
-		height: 70%;
+		height: 200px
+
+
 	}
 
 

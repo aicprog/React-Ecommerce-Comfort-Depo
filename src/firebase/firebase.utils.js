@@ -2,14 +2,16 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 
+
+
 const config = {
-	apiKey: "AIzaSyBykCNho5wiUBgXwBGHomAJJfo2zGMWtF8",
-	authDomain: "comfort-depot.firebaseapp.com",
-	projectId: "comfort-depot",
-	storageBucket: "comfort-depot.appspot.com",
-	messagingSenderId: "765736569437",
-	appId: "1:765736569437:web:6dea8ff82ef74c96635bb4",
-	measurementId: "G-JZV20CCNTG",
+	apiKey: process.env.REACT_APP_FIREBASE_KEY,
+	authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+	appId: process.env.REACT_APP_FIREBASE_APP_ID,
+	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_I,
 };
 
 //if snapshot does not exist, create one. 
@@ -38,6 +40,9 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     return userRef;
 }
+
+
+
 
 
 firebase.initializeApp(config);

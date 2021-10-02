@@ -4,11 +4,20 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useProductsContext } from '../context/products_context'
 import { useCartContext } from '../context/cart_context'
+import { useUserContext } from '../context/user_context'
+import {auth} from '../firebase/firebase.utils'
 
 
 const CartButtons = () => {
 const { toggleSidebar } = useProductsContext();
+const {loggedIn, signOut} = useUserContext()
 const {total_items} = useCartContext()
+
+const handleSignOut = () =>{
+	toggleSidebar()
+	signOut()
+}
+
   return (
 		<Wrapper className="cart-btn-wrapper">
 			<Link to="/cart" className="cart-btn" onClick={toggleSidebar}>
@@ -19,10 +28,16 @@ const {total_items} = useCartContext()
 				<span className="cart-name">Cart</span>
 			</Link>
 
-			<Link to="/login" className="auth-btn">
-				<FaUserPlus />
-				<span className="cart-name">Login</span>
-			</Link>
+			{loggedIn ? (
+				<Link to="/login" className="auth-btn" onClick={handleSignOut}>
+					<span className="cart-name">Sign Out</span>
+				</Link>
+			) : (
+				<Link to="/login" className="auth-btn" onClick={toggleSidebar}>
+					<FaUserPlus />
+					<span className="cart-name">Login</span>
+				</Link>
+			)}
 		</Wrapper>
 	);}
 

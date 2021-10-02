@@ -4,8 +4,13 @@ import { PageHero, StripeCheckout } from '../components'
 // extra imports
 import { useCartContext } from '../context/cart_context'
 import { Link } from 'react-router-dom'
+import { useUserContext } from '../context/user_context'
 
 const CheckoutPage = () => {
+
+  const { currentUser } = useUserContext();
+  console.log(currentUser);
+
   return (
     <main>
       <PageHero title="checkout"/>

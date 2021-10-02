@@ -9,32 +9,50 @@ const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = React.useState("")
 
         const handleSubmit = async event => {
-            event.preventDefault()
+			event.preventDefault();
 
-            if(password !== confirmPassword){
-                alert("passwords don't match")
-                return;
-        }
+			if (password !== confirmPassword) {
+				alert("passwords don't match");
+				return;
+			}
 
-        try{    
-            const {user} = await auth.createUserWithEmailAndPassword(email, password)
+			try {
+				const { user } = await auth.createUserWithEmailAndPassword(
+					email,
+					password
+				);
 
-                await createUserProfileDocument(user, {displayName})
-                //reset form
-                this.setState({
-                    displayName:'',
-                    email:'', 
-                    password:'',
-                    confirmPassword: ''
-                })
-        }catch(error){
-            console.error(error)
-        }
-    };
+				await createUserProfileDocument(user, { displayName });
+			} catch (error) {
+				console.error(error);
+			}
+
+			//reset form
+			setDisplayName("");
+			setEmail("");
+			setPassword("");
+			setConfirmPassword("");
+		};
 
     const handleChange = event =>{
         const{name, value} = event.target;
-        this.setState({[name]: value});
+        switch (name) {
+			case "displayName":
+				setDisplayName(value)
+			break;
+			case "email":
+				setEmail(value)
+			break;
+			case "password":
+				setPassword(value)
+			break;
+			case "confirmPassword":
+				setConfirmPassword(value)
+			break;
+
+			default:
+				break;
+		}
     }
 
     
@@ -51,7 +69,7 @@ const SignUp = () => {
 							onChange={handleChange}
 							label="Display Name"
 							className="form-input"
-							placeholder="email"
+							placeholder="display name"
 							required
 						/>
 
@@ -101,25 +119,48 @@ export default SignUp
 
 
 const Wrapper = styled.div`
+	width: 380px;
 	display: flex;
 	flex-direction: column;
-	width: 380px;
-
 
 	.title {
 		margin: 10px 0;
 		padding-bottom: 1rem;
 	}
 
-	button {
-		margin-top: 2rem;
+
+	.button {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 1rem;
+	}
+
+	.link-btn {
+		background: transparent;
+		border-color: transparent;
+		text-transform: capitalize;
+		padding: 0.25rem 0.5rem;
+		background: var(--clr-primary-5);
+		color: var(--clr-white);
+		border-radius: var(--radius);
+		letter-spacing: var(--spacing);
+		font-weight: 400;
+		cursor: pointer;
+	}
+	.clear-btn {
+		background: var(--clr-black);
 	}
 
 	.form {
 		display: flex;
 		flex-direction: column;
-		justify-content: space-evenly;
-		height: 90%;
+		justify-content: space-between;
+		height: 260px;
+		margin-top: 1rem;
+
+		button {
+			margin-top: 1rem;
+		}
 	}
 
 	.form-input {

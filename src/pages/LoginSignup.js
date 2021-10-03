@@ -2,28 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
-import { useUserContext } from "../context/user_context";
+
 
 
 const LoginSignUp = () => {
 
-	const {loggedIn, waiting} = useUserContext()
-	
-	if (waiting){
-		return(
-			<div></div>
-		)
-	}
-
-	if (loggedIn) {
-		return (
-			<ContentWrapper>
-				<div className="section section-center text-center">
-						<h2>You are already signed in...</h2>
-				</div>
-			</ContentWrapper>
-			);
-	}
 
 	return (
 		<Wrapper>

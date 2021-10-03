@@ -8,17 +8,33 @@ import { useUserContext } from '../context/user_context'
 
 const CheckoutPage = () => {
 
-  const { currentUser } = useUserContext();
-  console.log(currentUser);
+  const { cart } = useCartContext();
+  // console.log(currentUser);
 
   return (
-    <main>
-      <PageHero title="checkout"/>
-      <Wrapper className="page">
-        <h1>Checkout here</h1>
-      </Wrapper>
-    </main>
-    )
+		<main>
+			<PageHero title="checkout" />
+			<Wrapper className="page">
+				{cart.length < 1 ? (
+					<div class="empty">
+						<h1>Your cart is empty.</h1>
+						<Link to="/products" className="btn">
+							fill it
+						</Link>
+					</div>
+				) : (
+					<StripeCheckout />
+				)}
+			</Wrapper>
+		</main>
+	);
 }
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	.empty {
+		text-align: center;
+	}
+`
 export default CheckoutPage

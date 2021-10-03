@@ -17,6 +17,9 @@ import Stars from './Stars'
 import CartContent from './CartContent'
 import PageHero from './PageHero'
 import StripeCheckout from './StripeCheckout'
+import Error404 from './Error404'
+import StripeButton from "./StripeButton";
+
 export {
   FeaturedProducts,
   Navbar,
@@ -28,6 +31,7 @@ export {
   Contact,
   Loading,
   Error,
+  Error404,
   ProductImages,
   AddToCart,
   Filters,
@@ -37,4 +41,6 @@ export {
   CartContent,
   PageHero,
   StripeCheckout,
+  StripeButton,
+  
 }

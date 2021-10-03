@@ -8,14 +8,16 @@ import { useUserContext } from '../context/user_context'
 import {auth} from '../firebase/firebase.utils'
 
 
+
 const CartButtons = () => {
 const { toggleSidebar } = useProductsContext();
-const {loggedIn, signOut} = useUserContext()
-const {total_items} = useCartContext()
+const { myUser, signOut } = useUserContext();
+const {total_items, clearCart} = useCartContext()
 
 const handleSignOut = () =>{
 	toggleSidebar()
-	signOut()
+	clearCart();
+	signOut();
 }
 
   return (
@@ -28,7 +30,7 @@ const handleSignOut = () =>{
 				<span className="cart-name">Cart</span>
 			</Link>
 
-			{loggedIn ? (
+			{myUser ? (
 				<Link to="/login" className="auth-btn" onClick={handleSignOut}>
 					<span className="cart-name">Sign Out</span>
 				</Link>

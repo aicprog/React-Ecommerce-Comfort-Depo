@@ -1,35 +1,35 @@
+
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import {useFirebaseAuthProvider } from '../firebase/AuthContext';
 //import { useAuth0 } from '@auth0/auth0-react';
 // will remove later
-import { useUserContext } from '../context/user_context';
+
+	// return (
+	// 	<Route
+	// 		{...rest}
+	// 		render={(props) =>
+	// 			loggedIn ? (
+	// 				<Component {...props} />
+	// 			) : waiting ? (
+	// 			 	""
+	// 			 ) : (
+	// 				<Redirect to={redirectTo} />
+	// 			)
+	// 		}
+	// 	></Route>
+	// );
 
 
-
-const PrivateRoute = ({
-	component: Component,
-	loggedIn,
-	waiting,
-	redirectTo,
-	...rest
-}) => {
-	//const { currentUser, wasInitialized } = useUserContext();
-	console.log(waiting)
+const PrivateRoute = ({ children, redirectTo, currentUser, ...rest }) => {
+	console.log("LOGGED IN PRIVATE ROUTE", currentUser)
 	return (
 		<Route
 			{...rest}
-			render={(props) =>
-				loggedIn ? (
-					<Component {...props} />
-				) : waiting ? (
-				 	""
-				 ) : (
-					<Redirect to={redirectTo} />
-				)
-			}
+			render={() => {
+				return currentUser ? children : <Redirect to={redirectTo}></Redirect>;
+			}}
 		></Route>
 	);
 };
-
-
 export default PrivateRoute;

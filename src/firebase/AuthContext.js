@@ -7,7 +7,9 @@ export const FirebaseAuthProvider = ({children}) => {
 
 	const [currentUser, setCurrentUser] = useState(null);
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [waiting, setWaiting] = useState(true);	
+	//const [waiting, setWaiting] = useState(true);	
+	const [isLoading, setIsLoading] = useState(true)
+	const [error, setError] = useState(false )
 
 	const checkUserAuth = () => {
 		return auth.onAuthStateChanged(async (userAuth) => {
@@ -16,23 +18,22 @@ export const FirebaseAuthProvider = ({children}) => {
 				const userRef = await createUserProfileDocument(userAuth);
 				userRef.onSnapshot((snapshot) => {
 					setCurrentUser({ id: snapshot.id, ...snapshot.data() });
+					setIsLoading(false);
 				});
 			} else {
 				setCurrentUser(null);
 				setLoggedIn(false);
-				setWaiting(false);
+				//setWaiting(false);
 				localStorage.setItem("userLoggedIn", false);
+				setIsLoading(false);
+				
 			}
+			
 		});
 	};
 
 	  useEffect(() => {
 		checkUserAuth();
-
-		//if we get a value back for loggedIn, then we want to setWaiting to false so rest of components know we are no longer waiting for a value of loggedIn to come back.
-		if(loggedIn){
-			setWaiting(false)
-		}
 	}, [loggedIn]);
 
 
@@ -46,6 +47,7 @@ export const FirebaseAuthProvider = ({children}) => {
 				localStorage.setItem("userLoggedIn", true);
 			} catch (error) {
 				console.log(error);
+				setError(true)
 			}
 	};
 
@@ -56,6 +58,7 @@ export const FirebaseAuthProvider = ({children}) => {
 		});
 		localStorage.setItem("userLoggedIn", false);
 		setLoggedIn(false);
+		setIsLoading(false)
 		//setWaiting(false);
 		//unsubscribeFromAuth();
 	};
@@ -63,7 +66,15 @@ export const FirebaseAuthProvider = ({children}) => {
 
     return (
 			<AuthContext.Provider
-				value={{ currentUser, loggedIn, signOut, signInUser, waiting }}>
+				value={{
+					currentUser,
+					loggedIn,
+					signOut,
+					signInUser,
+					isLoading,
+					error,
+				}}
+			>
 				{children}
 			</AuthContext.Provider>
 		);

@@ -8,7 +8,7 @@ const SignIn = () => {
 
     const [email, setEmail] = React.useState("")
 	const [password, setPassword] = React.useState("")
-	const {signInUser} = useUserContext()
+	const {signInUser, error} = useUserContext()
 	//clears out
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -33,6 +33,8 @@ const SignIn = () => {
 			<Wrapper>
 				<div className="sign-in">
 					<h2 className="title">I already have an account</h2>
+					{error && <p className="error">There was an error with your email and/or password.</p>}
+
 					<span>Sign in with your email and password.</span>
 
 					<form onSubmit={handleSubmit} className="form">
@@ -84,6 +86,9 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 
+	.error{
+		color: red
+	}
 
 	.title {
 		margin: 10px 0;

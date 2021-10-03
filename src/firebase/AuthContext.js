@@ -27,6 +27,7 @@ export const FirebaseAuthProvider = ({children}) => {
 				localStorage.setItem("userLoggedIn", false);
 				setIsLoading(false);
 				
+				
 			}
 			
 		});
@@ -39,26 +40,21 @@ export const FirebaseAuthProvider = ({children}) => {
 
 
 	const signInUser = async (email, password) => {
+			setError(false);
 			try {
-				await auth.signInWithEmailAndPassword(email, password).then(() => {
-					window.location.href = "/";
-				});
+				await auth.signInWithEmailAndPassword(email, password)
 				console.log("success");
 				localStorage.setItem("userLoggedIn", true);
 			} catch (error) {
 				console.log(error);
-				setError(true)
+				setError(true);
 			}
 	};
 
 
 	const signOut = () => {
-		auth.signOut().then(() => {
-			window.location.href = "/login";
-		});
+		auth.signOut().then(() => setLoggedIn(false))
 		localStorage.setItem("userLoggedIn", false);
-		setLoggedIn(false);
-		setIsLoading(false)
 		//setWaiting(false);
 		//unsubscribeFromAuth();
 	};

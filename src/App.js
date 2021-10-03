@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { Navbar, Sidebar, Footer } from './components'
 import {useUserContext } from './context/user_context';
 import { useFirebaseAuthProvider } from './firebase/AuthContext';
-import {About, Auth, Cart, Checkout, Home, Error, PrivateRoute, Products,
+import {About, Auth, Cart, Home, Error, PrivateRoute, Products,
 	SingleProduct, AuthWrapper, LoginSignUp
 } from "./pages";
 
@@ -37,14 +37,6 @@ function App() {
 					<Route exact path="/cart">
 						<Cart />
 					</Route>
-					<PrivateRoute
-						exact
-						path="/checkout"
-						currentUser={loggedIn}
-						redirectTo="/"
-					>
-						<Checkout />
-					</PrivateRoute>
 					<Route exact path="/products">
 						<Products />
 					</Route>

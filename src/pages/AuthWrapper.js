@@ -18,13 +18,14 @@ const AuthWrapper = ({ children }) => {
 		);
 	}
 
-	if (error) {
-		return (
-			<Wrapper>
-				<h1>{error.message}</h1>
-			</Wrapper>
-		);
-	}
+	// if (error) {
+	// 	console.log(error)
+	// 	return (
+	// 		<Wrapper>
+	// 			<h1>{error.message}</h1>
+	// 		</Wrapper>
+	// 	);
+	// }
 
 	return <div>{children}</div>;
 };

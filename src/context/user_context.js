@@ -6,7 +6,7 @@ const UserContext = React.createContext()
 
 
 export const UserProvider = ({ children }) => {
-	const { currentUser, signInUser, signOut, loggedIn } = useFirebaseAuthProvider();
+	const { currentUser, signInUser, signOut, loggedIn, error } = useFirebaseAuthProvider();
 
 	const [myUser, setMyUser] = useState(null)
 	
@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
 
   return (
 		<UserContext.Provider
-			value={{ currentUser, signOut, signInUser, myUser, loggedIn }}
+			value={{ currentUser, signOut, signInUser, myUser, loggedIn, error }}
 		>
 			{children}
 		</UserContext.Provider>
